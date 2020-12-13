@@ -1,30 +1,17 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from flask_qa import app, db, bcrypt
-from flask_qa.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask_qa.forms import RegistrationForm, LoginForm, UpdateAccountForm, QuestionForm, AnswerForm
 from flask_qa.models import Users, Question, Answer
 from flask_login import login_user, current_user, logout_user, login_required
 
-
-ques = [
-    {
-        'asker': 'Sudhanshu',
-        'title': 'Question 1',
-        'question': 'First question',
-        'date_posted': 'December 8, 2020'
-    },
-    {
-        'asker': 'Anish',
-        'title': 'Question 2',
-        'question': 'Second question',
-        'date_posted': 'April 1, 2019'
-    }
-]
 
 
 @app.route("/")
 @app.route("/home")
 def home():
+    ques = Question.query.all()
     return render_template('home.html', ques=ques)
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -81,3 +68,103 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     return render_template('account.html', title='Account', form=form)
+
+
+@app.route("/question/new", methods=['GET', 'POST'])
+@login_required
+def new_question():
+    form = QuestionForm()
+    if form.validate_on_submit():
+        ques = Question(title=form.title.data, content=form.content.data, asker=current_user)
+        db.session.add(ques)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_ques.html', title='New Question',
+                           form=form, legend='New Question')
+
+
+@app.route("/question/<int:question_id>")
+def question(question_id):
+    question = Question.query.get_or_404(question_id)
+    answer=Answer.query.filter_by(ques_id=question_id).all()
+    return render_template('question.html', title=question.title, question=question, answer=answer)
+
+
+@app.route("/question/<int:question_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_question(question_id):
+    question = Question.query.get_or_404(question_id)
+    if question.asker != current_user:
+        abort(403)
+    form = QuestionForm()
+    if form.validate_on_submit():
+        question.title = form.title.data
+        question.content = form.content.data
+        db.session.commit()
+        flash('Your question has been updated!', 'success')
+        return redirect(url_for('question', question_id=question.id))
+    elif request.method == 'GET':
+        form.title.data = question.title
+        form.content.data = question.content
+    return render_template('create_ques.html', title='Update Question',
+                           form=form, legend='Update Question')
+
+
+@app.route("/question/<int:question_id>/delete", methods=['POST'])
+@login_required
+def delete_question(question_id):
+    question = Question.query.get_or_404(question_id)
+    if question.asker != current_user:
+        abort(403)
+    db.session.delete(question)
+    db.session.commit()
+    flash('Your question has been deleted!', 'success')
+    return redirect(url_for('home'))
+
+
+@app.route("/question/<int:question_id>/answer", methods=['GET', 'POST'])
+@login_required
+def new_answer(question_id):
+    form = AnswerForm()
+    if form.validate_on_submit():
+        ans = Answer(content=form.content.data, ques_id=question_id,user_id=current_user.id)
+        db.session.add(ans)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_ans.html', title='New Answer',
+                           form=form, legend='New Answer')
+
+
+@app.route("/question/<int:question_id>/answer/<int:answer_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_answer(question_id,answer_id):
+    answer = Answer.query.get_or_404(answer_id)
+    if answer.answerer != current_user:
+        abort(403)
+    form = AnswerForm()
+    if form.validate_on_submit():
+        answer.content = form.content.data
+        db.session.commit()
+        flash('Your answer has been updated!', 'success')
+        return redirect(url_for('question', question_id=question_id))
+    elif request.method == 'GET':
+        form.content.data = answer.content
+    return render_template('create_ans.html', title='Update answer',
+                           form=form, legend='Update answer')
+
+
+
+@app.route("/question/<int:question_id>/answer/<int:answer_id>/delete", methods=['GET', 'POST'])
+@login_required
+def delete_answer(question_id, answer_id):
+    answer = Answer.query.get_or_404(answer_id)
+    if answer.answerer != current_user:
+        abort(403)
+    db.session.delete(answer)
+    db.session.commit()
+    flash('Your answer has been deleted!', 'success')
+    return redirect(url_for('home'))
+
+
