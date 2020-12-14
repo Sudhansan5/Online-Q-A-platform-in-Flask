@@ -1,0 +1,311 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.5 (Ubuntu 12.5-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.5 (Ubuntu 12.5-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE TABLE public.alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.alembic_version OWNER TO sudhan_flask;
+
+--
+-- Name: answer; Type: TABLE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE TABLE public.answer (
+    id integer NOT NULL,
+    date_posted timestamp without time zone NOT NULL,
+    content text NOT NULL,
+    ques_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.answer OWNER TO sudhan_flask;
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE SEQUENCE public.answer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.answer_id_seq OWNER TO sudhan_flask;
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sudhan_flask
+--
+
+ALTER SEQUENCE public.answer_id_seq OWNED BY public.answer.id;
+
+
+--
+-- Name: question; Type: TABLE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE TABLE public.question (
+    id integer NOT NULL,
+    title character varying(100) NOT NULL,
+    date_posted timestamp without time zone NOT NULL,
+    content text NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.question OWNER TO sudhan_flask;
+
+--
+-- Name: question_id_seq; Type: SEQUENCE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE SEQUENCE public.question_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.question_id_seq OWNER TO sudhan_flask;
+
+--
+-- Name: question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sudhan_flask
+--
+
+ALTER SEQUENCE public.question_id_seq OWNED BY public.question.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    username character varying(20) NOT NULL,
+    email character varying(120) NOT NULL,
+    password character varying(60) NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO sudhan_flask;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: sudhan_flask
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO sudhan_flask;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: sudhan_flask
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: answer id; Type: DEFAULT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.answer ALTER COLUMN id SET DEFAULT nextval('public.answer_id_seq'::regclass);
+
+
+--
+-- Name: question id; Type: DEFAULT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.question ALTER COLUMN id SET DEFAULT nextval('public.question_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: sudhan_flask
+--
+
+COPY public.alembic_version (version_num) FROM stdin;
+0fdc98d92904
+\.
+
+
+--
+-- Data for Name: answer; Type: TABLE DATA; Schema: public; Owner: sudhan_flask
+--
+
+COPY public.answer (id, date_posted, content, ques_id, user_id) FROM stdin;
+11	2020-12-14 09:14:54.5248	Currently Python is pretty popular language. As mentioned in other answers Python is general purpose language and has been applied in numerous and different fields ranging from AI, machine learning,web development and almost anything. Since you asked for popular, below are some popular sites/apps powered by Python in one way or the other:\r\n\r\n1.Instagram one of the most popular if not the most popular photo sharing apps out there.\r\n\r\n2.YouTube the most popular video sharing platform this far.\r\n\r\n3.Dropbox a file hosting service offering cloud storage.\r\n\r\n4.SurveyMonkey a renowned online survey tool.\r\n\r\n5.Quora - need I say anything?\r\n\r\n6.Bitly - a URL shortener and link management platform.\r\n\r\n7.Pintererest\r\n\r\n8.Spotify a digital music service\r\n\r\n9.Google\r\n\r\n10.Eventbrite	7	2
+12	2020-12-14 09:17:21.173808	Python is a very straightforward programming language that you can study without much direction. This programming has a very clean syntax and various importantly, an extensive library. The main reason for its fame is because of its large user interface which has created an actual feedback loop.\r\n\r\nThis programming language is essentially used for various purposes including website and internet development, scientific and numeric computing, software development, educational purposes, scientific data, organizational tools and much more.	6	2
+6	2020-12-14 02:59:11.254601	Start Up - Hands down!\r\n\r\nI think I am well qualified to answer this question. I worked in an MNC for less than a year, and is now working in a startup.\r\n\r\nSo, here goes my 2 cents.\r\n\r\nGrowth\r\n\r\nIn an MNC you will be a star, among billions of galaxies.\r\nThe personal growth will be slower than that of a snail.\r\nMost of these companies use obsolete technologies which is of no use outside. You will not have any meaningful work to do, which sounds fun now , but is actually a career-killer. You will waste the most precious time of your life doing nothing at an MNC.\r\n\r\nMajority of the freshers are put into support projects where your work will be attending phone calls, making spreadsheets and word documents and forwarding mails. Hell yeah , you toiled hard for 4 years and got a degree to forward a mail from a guy who you don't know to another guy who doesn't care who you are.\r\n\r\nOn the other hand , in a startup you get to work with cutting edge technologies, do something on your own, innovate, think out of the box and make a name for yourself.\r\n\r\nIn the growth part MNC falls far behind a start up. Forget growth , you will end up ruining whatever good skills you have at an MNC.\r\n\r\nManagement - the important part\r\n\r\nManagement in an MNC totally sucks. They are the boss. They need slaves who can obey their orders. Dirty politics is on play here. If you are good at licking boots you can climb up the hierarchy , if you are not good at anything other than technology you will remain in the lowest tier forever without any recognition.\r\n\r\nThe worst part is your interest , your taste etc does not count even if you are smarter than your manager.\r\n\r\nThis answer might help in knowing about this point more.\r\nSooraj Chandran's answer to What is the dark side of a job at TCS?\r\n\r\nOn the other hand most of the startups today follows a flat hierarchy. No one will give you orders, what you do is valued , not what you tell. If you are good at something you can shine , you need not please people to get a better salary.\r\n\r\nIn an MNC you make colleagues , in a start up you make friends.\r\n\r\nLife\r\n\r\nMNC - just like a strict college - formal dress, leather shoes , strict timings , clock in 9 hours even if you have nothing other than reading Quora to do. No particular enjoyments , very less salary compared to industry standards , no perks and benefits , Shitty gadgets to work with ( My phone was faster than the PC I worked with ).\r\n\r\nStartups - (In my case) - Free food , free wifi , no dress code , flexi timings , lot of pass time ( Foosball, table tennis , mini golf , hang out spots ) , lots of friends and Mac to work with ( which you can take home )\r\n\r\nOnly good thing about working in an MNC is every guy's dream - an onsite opportunity - again which is something that you will only get if you are good at licking boots.\r\n\r\nParting note : - If your are a techie ,and is interested in coding never ever go to an MNC. NEVER EVER.\r\n\r\n	5	2
+7	2020-12-14 08:54:33.092203	Either and Neither!\r\n\r\nLet me explain...\r\n\r\nFirst let's talk about Either:\r\n\r\nThe answer to this question is very personal and if you think that you have read this before - then you can stop reading from now on... else read along!\r\n\r\nThe reason I say its personal is because everyone has different ambitions and vision of their lives.\r\n\r\nThe only reason you should join a startup is if you are excited about the problem statement and the solution that the startup wants to offer. Join for making people's lives easier. Not just for the money or dream of becoming rich one day. 9 out of 10 startups fail - that too - for every 1 startup idea - there are 10 more implementing the same thing. So your odds of success are further reduced (unless you had the first mover advantage when Block Chain came out or when IoT was fresh).\r\n\r\nSo back to the main question. Join a startup to solve a problem and get opportunities to learn and see how a company is grown from nothing to a big company (assuming that it's successful).\r\n\r\nDON'T join for free food, Macbooks, Fancy Offices, Cozy Chair, Games Room, Friday Drinks... etc... VC money does run out... things do get super bad, and when that happens, the first thing anyone cuts down is an extra cost - and then - people.\r\n\r\nSo the attachment to a problem statement should be super high - that you are willing to forego your salary for a couple of months when the shit hits the ceiling (my advice is to have at least 6 months worth of your monthly salary in an FD before you think of joining any startup - be practical)\r\n\r\nNow... on to MNCs...\r\n\r\nThe advantage of joining an MNC is that you will get opportunities to work on different projects in due course of your time. Not all MNCs are equal. Find opportunities in companies that have a startup culture within them (by that I mean solving newer problems by tapping into customer pulse). Your goal here should be to network with seniors (not regarding tenure - but experience [real experience. There is a difference between people who have 10 years of experience where they have repeated their first year 10 times - and there are people who HAVE 10 years experience]). Work closely with them, use MNCs mentor program (most of the large ones I know and have worked for in the past, have one).\r\n\r\nIn the end - have a solid reason to join either.\r\n\r\nNow coming to Neither:\r\n\r\nDon't think about your career spread between Startup and MNC... plan it, own it and implement it. With a plan, if a startup comes along and you feel motivated to solve the problem statement - then, by all means, join a startup. However, if an MNC provides you a path to fulfill your ambitions - follow that path. Keep money out of this equation... you will start to make better choices. At the end experience matters - not for your resume - but later when you are ready and passionate about a problem statement - you can startup and solve that problem.	5	1
+8	2020-12-14 09:00:03.783521	There won't be a permanent solution anytime soon.\r\n\r\nAs of now, AstraZeneca-Oxford University produced vaccine candidate has entered phase 3 of clinical trials. Studies have shown that it triggers an excellent immune response, with twice the number of antibodies being produced.\r\n\r\nModerna (US) has currently suspended its phase 3 trials, reason remain unknown. It might be due to the fact that phase 2 results weren't satisfactory.\r\n\r\nHere in India, phase 1 trials of indigenously produced Covaxin were started, so still months to go before we hear any news on it.\r\n\r\nFew days back, Russia's Sechenov Institute announced that their Vaccine is completely safe and complied with the current standards. Turns out the test was done on a mere 38 people. Hmmm…\r\n\r\nPfizer-BioNtech have been given a whopping 1.95 billion Dollars after encouraging results of phase 1 and phase 2 trials.	3	1
+9	2020-12-14 09:08:16.485517	There are many, many reasons that made python popular, I can only name a few.\r\n\r\n1. Easy to read code, free of needless special characters and parentheses. Enforced identation (love it or hate it) leads to wells structured code and reduces the number of bugs that might be created by ambigous if-else statements for example.\r\n\r\n2. One way to do things (and often times: One and only one way)\r\n\r\n3. Batteries included philosophy: There are tons of packages that come with each Python installation, and tens of thousands more available on the web.\r\n\r\n4. Reasonable performance for a scripting language: By itself not terribly fast Python provides and easy way to call foreign functions that have been written in C or another execution-speed optimized language. Furthermore it is possible to compile Python code, increasing speed further.\r\n\r\n5. Open source (and no doubts about it): Users do not have to worry about any patent nonsense or licence payments that may or may not be due in the future\r\n\r\n6. Developed by one (well, very few actually) person. As opposed to a whole comittee where the many compromises necessary will very often degrade the quality.\r\n\r\n7. Once it was popular it became more popular (I bet there is a far more elegant way to express this...): Once a language or technology has reached a certain adoption rate, a disproportionate ammount of books, tutorials, courses and technologies building on it appear. Increasing its popularity even further.\r\nThis can be a blessing (Python) or a curse (Cobol, Java)	6	4
+10	2020-12-14 09:09:24.284815	Six Indian companies are working on a Covid-19 vaccine, joining global efforts to curb spreading of the novel coronavirus that’s infected more than 2 million people so far.\r\n\r\nNearly 70 "vaccine candidates"are being tested globally. and at least three have moved to the human clinical trial stage, but a vaccine is unlikely to be ready for mass use before 2021.\r\n\r\n“While Zydus Cadila is working on two vaccines, Serum Institute, Biological E, Bharat Biotech, Indian Immunologicals, and Mynvax are developing one vaccine each," Gagandeep Kang, executive director of the Translational Health Science and Technology Institute, Faridabad, told Press Trust of India.\r\n\r\nKang is also vice chairperson of the Coalition for Epidemic Preparedness Innovations, which noted in a recent study that the “global vaccine R&D effort in response to the Covid-19 pandemic is unprecedented in terms of scale and speed".\r\n\r\nBut it is a complicated process with many stages of testing and many challenges, said experts. A vaccine for the new coronavirus, SARS-CoV-2, may not take 10 years that other vaccines do, but it could be at least a year before it is proven safe, effective, and made widely available, they said.\r\n\r\n“Vaccine development is a lengthy process which takes years, with many challenges," said E. Sreekumar, chief scientific officer at the Rajiv Gandhi Centre for Biotechnology in Kerala.\r\n\r\n“Generally, vaccines take several months to pass different stages of testing, and then approvals also take time. For Covid-19, we don’t expect a vaccine this year," Rakesh Mishra, director of CSIR-Centre for Cellular & Molecular Biology in Hyderabad, said.	3	4
+13	2020-12-14 09:18:40.419707	Mumbai Indians won IPL 2020 trophy, 5th IPL title for Rohit Sharma's team. Mumbai Indians (MI) on November 09 clinched their record-extending fifth Indian Premier League (IPL) title after defeating Delhi Capitals (DC) by five wickets in the final.	4	2
+\.
+
+
+--
+-- Data for Name: question; Type: TABLE DATA; Schema: public; Owner: sudhan_flask
+--
+
+COPY public.question (id, title, date_posted, content, user_id) FROM stdin;
+3	Corona vaccine	2020-12-13 07:47:00.279975	When corona vaccine will be available for us?	2
+4	Who won IPL 2020?	2020-12-13 12:46:40.59962	I want to know IPL 2020 winner	3
+5	What's better? Working in a start up or an MNC?	2020-12-14 02:57:00.452804	I wanted to know that should I join an MNC or a startup.	4
+6	What is it about Python that has made it so popular?	2020-12-14 09:06:34.876413	What are the features of Python that have made it so popular?	1
+7	What are some popular things made with Python?	2020-12-14 09:12:10.153996	I wanted to know about various software that is popular and built using Python.	4
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: sudhan_flask
+--
+
+COPY public.users (id, username, email, password) FROM stdin;
+1	Sudhan	sudhansan5@gmail.com	$2b$12$0Zra/lbyf4uTtbhvIs96W.Ol8v/IaIetUi7bFZM2CCA3NdBDNkBjq
+2	sonu raj	sonuraj@gmail.com	$2b$12$/yMfC6yDN/fALQFwykpGZezlil0EA/1sT92twjk5DypGwaqt5jqUS
+3	sudhansan	test@gmail.com	$2b$12$MuwBCYSloZla/YxZcH/BXOtKR1Q5cgHtUNpRJEjF4/L14/xt3Gtcy
+4	Raju Kumar	raju@gmail.com	$2b$12$m9VSLVC51CjGlGGB2r43C.K6TW/NiBgNaBzkOo4AM/ZiNLK71VNy.
+\.
+
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: sudhan_flask
+--
+
+SELECT pg_catalog.setval('public.answer_id_seq', 13, true);
+
+
+--
+-- Name: question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: sudhan_flask
+--
+
+SELECT pg_catalog.setval('public.question_id_seq', 7, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: sudhan_flask
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: answer answer_pkey; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: question question_pkey; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.question
+    ADD CONSTRAINT question_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- Name: answer answer_ques_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_ques_id_fkey FOREIGN KEY (ques_id) REFERENCES public.question(id);
+
+
+--
+-- Name: answer answer_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: question question_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: sudhan_flask
+--
+
+ALTER TABLE ONLY public.question
+    ADD CONSTRAINT question_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

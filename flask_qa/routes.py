@@ -9,7 +9,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    ques = Question.query.all()
+    page = request.args.get('page', 1, type=int)
+    ques = Question.query.order_by(Question.date_posted.desc())\
+        .paginate(page=page, per_page=3)
     return render_template('home.html', ques=ques)
 
 

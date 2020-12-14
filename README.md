@@ -26,6 +26,12 @@ An online Q/A platform built in Flask.
   flask db upgrade
 ```
 
+* Run below command in your terminal if you wish to use my sample data for the database.
+
+```Shell
+  pg_dump sudhan_flask --username=sudhan_flask --host=127.0.0.1 < dummy.db
+```
+
 * Run below command in your terminal .
 
 ```Python3
