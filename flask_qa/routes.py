@@ -80,7 +80,9 @@ def account():
 def new_question():
     form = QuestionForm()
     if form.validate_on_submit():
-        ques = Question(title=form.title.data, content=form.content.data, asker=current_user)
+        ques = Question(title=form.title.data,
+                        content=form.content.data,
+                        asker=current_user)
         db.session.add(ques)
         db.session.commit()
         flash('Your question has been created!', 'success')
@@ -93,7 +95,10 @@ def new_question():
 def question(question_id):
     question = Question.query.get_or_404(question_id)
     answer = Answer.query.filter_by(ques_id=question_id).all()
-    return render_template('question.html', title=question.title, question=question, answer=answer)
+    return render_template('question.html',
+                           title=question.title,
+                           question=question,
+                           answer=answer)
 
 
 @app.route("/question/<int:question_id>/update", methods=['GET', 'POST'])
@@ -133,7 +138,9 @@ def delete_question(question_id):
 def new_answer(question_id):
     form = AnswerForm()
     if form.validate_on_submit():
-        ans = Answer(content=form.content.data, ques_id=question_id,user_id=current_user.id)
+        ans = Answer(content=form.content.data,
+                     ques_id=question_id,
+                     user_id=current_user.id)
         db.session.add(ans)
         db.session.commit()
         flash('Your answer has been created!', 'success')
@@ -182,3 +189,8 @@ def page_not_found(e):
 @app.errorhandler(403)
 def permission_denied(e):
     return render_template('403.html'), 403
+
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('500.html'), 500

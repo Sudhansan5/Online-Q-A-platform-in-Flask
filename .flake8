@@ -1,0 +1,4 @@
+[flake8]
+ignore =E402, F401 
+# for imported but unused and assigned but never used and import not assigned at top.
+exclude = migrations
