@@ -25,11 +25,27 @@ h1, h2, h3, h4, h5, h6 {
   background: rgb(247, 232, 214);
   padding: 10px 20px;
   border: 1px solid #dddddd;
-  border-radius: 3px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-
 #name{
   color: brown;
+}
+
+#que{
+  color: rgb(38, 108, 238);
+}
+
+#que:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+.answer-section {
+  background: rgb(247, 217, 181);
+  padding: 10px 20px;
+  border: 1px solid #adadad;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
