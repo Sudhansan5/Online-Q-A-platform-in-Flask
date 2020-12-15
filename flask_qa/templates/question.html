@@ -2,7 +2,7 @@
 {% block content %}
   <div class="media content-section">
     <div class="media-body">
-        <a class="mr-2" href="#">{{ question.asker.username }}</a>
+        <a class="mr-2 name" id="name">{{ question.asker.username }}</a>
         <small class="text-muted">{{ question.date_posted.strftime('%Y-%m-%d') }}</small>
         {% if question.asker == current_user %}
           <div>
@@ -19,7 +19,7 @@
       <div class="media-body">
         {% for ans in answer %}
         <div class="container">
-          <a class="mr-2 mt-3" href="#">{{ ans.answerer.username }}</a>
+          <a class="mr-2 mt-3" id="name">{{ ans.answerer.username }}</a>
           <small class="text-muted">{{ ans.date_posted.strftime('%Y-%m-%d') }}</small>
           <p class="article-content">{{ ans.content }}</p>
           {% if current_user == ans.answerer %}

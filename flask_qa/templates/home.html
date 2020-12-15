@@ -4,7 +4,7 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ que.asker.username }}</a>
+              <a class="mr-2" id="name">{{ que.asker.username }}</a>
               <small class="text-muted">{{ que.date_posted.strftime('%Y-%m-%d') }}</small>
             </div>
             <h2><a class="article-title" href="{{ url_for('question', question_id=que.id) }}">{{ que.title }}</a></h2>
