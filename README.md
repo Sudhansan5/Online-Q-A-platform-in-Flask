@@ -20,10 +20,10 @@ An online Q/A platform built in Flask.
 
 * Create role and database in postgres from create_db.sql
 
-* Run below command in your terminal to create tables.
+* Run below command in your terminal for migration.
 
 ```Python3
-  flask db upgrade
+  python manage.py db upgrade
 ```
 
 * Run below command in your terminal if you wish to use my sample data for the database.
