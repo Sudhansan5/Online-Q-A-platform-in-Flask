@@ -129,6 +129,7 @@ def delete_question(question_id):
     question = Question.query.get_or_404(question_id)
     if question.asker != current_user:
         abort(403)
+    Answer.query.filter_by(ques_id=question_id).delete()
     db.session.delete(question)
     db.session.commit()
     flash('Your question has been deleted!', 'success')
