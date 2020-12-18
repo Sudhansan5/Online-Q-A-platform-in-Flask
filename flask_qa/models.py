@@ -18,7 +18,7 @@ class Users(db.Model, UserMixin):
     ans = db.relationship('Answer', backref='answerer', lazy=True)
 
     def __repr__(self):
-        return f"Users('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"Users('{self.username}', '{self.email}')"
 
 
 class Question(db.Model):
