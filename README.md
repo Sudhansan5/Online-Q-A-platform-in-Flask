@@ -34,8 +34,9 @@ An online Q/A platform built in Flask.
 
 * Run below command in your terminal .
 
-```Python3
-  python run.py
+```python3
+  export FLASK_APP=run.py
+  flask run
 ```
 
 * Open any browser and go to http://localhost:5000/

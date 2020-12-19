@@ -5,10 +5,16 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
+    '''
+    This function login the user
+    '''
     return Users.query.get(int(user_id))
 
 
 class Users(db.Model, UserMixin):
+    '''
+        Table Schema for Users table
+    '''
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -22,6 +28,9 @@ class Users(db.Model, UserMixin):
 
 
 class Question(db.Model):
+    '''
+        Table Schema for Question table
+    '''
     __tablename__ = 'question'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -37,6 +46,9 @@ class Question(db.Model):
 
 
 class Answer(db.Model):
+    '''
+        Table Schema for Answer table
+    '''
     __tablename__ = 'answer'
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime,

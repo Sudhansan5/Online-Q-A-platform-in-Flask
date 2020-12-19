@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for que in ques.items %}
+    {% for single_question in question.items %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" id="name">{{ que.asker.username }}</a>
-              <small class="text-muted">{{ que.date_posted.strftime('%Y-%m-%d') }}</small>
+              <a class="mr-2" id="name">{{ single_question.asker.username }}</a>
+              <small class="text-muted">{{ single_question.date_posted.strftime('%Y-%m-%d') }}</small>
             </div>
-            <h2><a class="article-title" id="que" href="{{ url_for('question', question_id=que.id) }}">{{ que.title }}</a></h2>
-            <p class="article-content">{{ que.content }}</p>
+            <h2><a class="article-title" id="que" href="{{ url_for('question', question_id=single_question.id) }}">{{ single_question.title }}</a></h2>
+            <p class="article-content">{{ single_question.content }}</p>
           </div>
         </article>
     {% endfor %}
-    {% for page_num in ques.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% for page_num in question.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
-        {% if ques.page == page_num %}
+        {% if question.page == page_num %}
           <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
         {% else %}
           <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>

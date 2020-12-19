@@ -7,6 +7,9 @@ from flask_qa.models import Users
 
 
 class RegistrationForm(FlaskForm):
+    '''
+        Form for registration
+    '''
     username = StringField('Username',
                            validators=[DataRequired(),
                                        Length(min=2, max=16)])
@@ -20,17 +23,26 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
+        '''
+            This function checks if username is already present or not
+        '''
         user = Users.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Username already taken.')
 
     def validate_email(self, email):
+        '''
+            This function checks if email is already present or not
+        '''
         user = Users.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email already taken.')
 
 
 class LoginForm(FlaskForm):
+    '''
+        Form for login
+    '''
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -38,6 +50,9 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
+    '''
+        Form for updating account information
+    '''
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
@@ -58,11 +73,17 @@ class UpdateAccountForm(FlaskForm):
 
 
 class QuestionForm(FlaskForm):
+    '''
+        Form to create a new question
+    '''
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
 class AnswerForm(FlaskForm):
+    '''
+        Form to create a new answer
+    '''
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Submit')
