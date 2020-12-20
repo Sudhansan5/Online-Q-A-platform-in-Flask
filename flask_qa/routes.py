@@ -32,7 +32,7 @@ def register():
                      password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created! You can log in now', 'success')
+        flash('Your account has been created!', 'success')
         login_user(user)
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
@@ -112,7 +112,7 @@ def question(question_id):
         View for question
     '''
     question = Question.query.get_or_404(question_id)
-    answer = Answer.query.filter_by(ques_id=question_id).all()
+    answer = Answer.query.filter_by(question_id=question_id).all()
     return render_template('question.html',
                            title=question.title,
                            question=question,
@@ -151,7 +151,7 @@ def delete_question(question_id):
     question = Question.query.get_or_404(question_id)
     if question.asker != current_user:
         abort(403)
-    Answer.query.filter_by(ques_id=question_id).delete()
+    Answer.query.filter_by(question_id=question_id).delete()
     db.session.delete(question)
     db.session.commit()
     flash('Your question has been deleted!', 'success')
@@ -167,7 +167,7 @@ def new_answer(question_id):
     form = AnswerForm()
     if form.validate_on_submit():
         ans = Answer(content=form.content.data,
-                     ques_id=question_id,
+                     question_id=question_id,
                      user_id=current_user.id)
         db.session.add(ans)
         db.session.commit()

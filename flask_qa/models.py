@@ -20,8 +20,8 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    ques = db.relationship('Question', backref='asker', lazy=True)
-    ans = db.relationship('Answer', backref='answerer', lazy=True)
+    asked_question = db.relationship('Question', backref='asker', lazy=True)
+    given_answer = db.relationship('Answer', backref='answerer', lazy=True)
 
     def __repr__(self):
         return f"Users('{self.username}', '{self.email}')"
@@ -39,7 +39,7 @@ class Question(db.Model):
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    ans = db.relationship('Answer', backref='que', lazy=True)
+    answers = db.relationship('Answer', backref='question', lazy=True)
 
     def __repr__(self):
         return f"Question('{self.title}', '{self.date_posted}')"
@@ -55,9 +55,9 @@ class Answer(db.Model):
                             nullable=False,
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
-    ques_id = db.Column(db.Integer,
-                        db.ForeignKey('question.id'),
-                        nullable=False)
+    question_id = db.Column(db.Integer,
+                            db.ForeignKey('question.id'),
+                            )
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
