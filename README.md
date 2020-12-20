@@ -18,27 +18,27 @@ An online Q/A platform built in Flask.
 
 ## Get Started
 
-* Create role and database in postgres from create_db.sql
+1. Create role and database in postgres from create_db.sql
 
-* Run below command in your terminal for migration.
+2. Run below command in your terminal for migration.
 
-```Python3
-  python manage.py db upgrade
-```
+   ```Python3
+     python manage.py db upgrade
+   ```
 
-* Run below command in your terminal if you wish to use my sample data for the database.
+   or Run below command in your terminal if you wish to use my sample data for the database.
 
-```Shell
-  pg_dump sudhan_flask --username=sudhan_flask --host=127.0.0.1 < dummy.db
-```
+   ```Shell
+     psql sudhan_flask --username=sudhan_flask --host=127.0.0.1 < dummy.db
+   ```
 
-* Run below command in your terminal .
+3. Run below command in your terminal .
 
-```python3
-  export FLASK_APP=run.py
-  flask run
-```
+   ```python3
+     export FLASK_APP=run.py
+     flask run
+   ```
 
-* Open any browser and go to http://localhost:5000/
+4. Open any browser and go to http://localhost:5000/
 
-* Delete database and role in postgres using drop_db.sql
+5. Delete database and role in postgres using drop_db.sql
